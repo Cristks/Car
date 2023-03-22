@@ -1,13 +1,13 @@
 import express from 'express';
-import errorMiddleware from './Middelwares/errorMiddealwares';
+import errorMiddlewares from './Middelwares/ErrorMiddealwares';
 import carsRoutes from './Routes/CarsRoutes';
 
 const app = express();
 
 app.use(express.json());
-app.use('/cars', carsRoutes);
+app.use(carsRoutes);
 
-app.use(errorMiddleware);
+app.use(errorMiddlewares);
 
 export default app;
 // iniciando projeto
