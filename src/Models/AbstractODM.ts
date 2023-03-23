@@ -20,10 +20,6 @@ abstract class AbstractODM<T> {
     // console.log(obj);
     return this.model.create({ ...obj });
   }
-
-//   public async findAllCars(): Promise<T[]> {
-//     return this.model.find();
-//   }
 }
   
 export default AbstractODM;

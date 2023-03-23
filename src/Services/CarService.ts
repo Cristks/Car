@@ -31,6 +31,13 @@ class CarService {
     if (!result) throw new ErrorHttp('Car not found', 404);
     return this.createCarDomain(result);
   }
+
+  public async updateCars(id: string, carObj: ICar) {
+    const carODM = new CarODM();
+    const result = await carODM.updateCars(id, carObj);
+    if (!result) throw new ErrorHttp('Car not found', 404);
+    return this.createCarDomain(result);
+  }
 }
 
 export default CarService;

@@ -9,4 +9,6 @@ routers.get('/cars', (req, res, next) => new CarController(req, res, next).findA
 
 routers.get('/cars/:id', (req, res, next) => new CarController(req, res, next).findByIdCars());
 
+routers.put('/cars/:id', (req, res, next) => new CarController(req, res, next).updateCars());
+
 export default routers;
