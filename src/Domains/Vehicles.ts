@@ -16,6 +16,22 @@ abstract class Vehicles {
     this.status = objVehicles.status || false;
     this.buyValue = objVehicles.buyValue;
   }
+
+  public setId(id: string) {
+    this.id = id;
+  }
+
+  public getId() {
+    return this.id;
+  }
+
+  public setModel(model: string) {
+    this.model = model;
+  }
+
+  public getModel() {
+    return this.model;
+  }
 }
 
 export default Vehicles;
