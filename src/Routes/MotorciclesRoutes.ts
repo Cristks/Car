@@ -6,10 +6,13 @@ const routers = Router();
 routers.post('/motorcycles', (req, res, next) => 
   new MotorcycleController(req, res, next).createMotor());
 
-// routers.get('/cars', (req, res, next) => new CarController(req, res, next).findAllCars());
+routers.get('/motorcycles', (req, res, next) => 
+  new MotorcycleController(req, res, next).findAllMotors());
 
-// routers.get('/cars/:id', (req, res, next) => new CarController(req, res, next).findByIdCars());
+routers.get('/motorcycles/:id', (req, res, next) => 
+  new MotorcycleController(req, res, next).findByIdMotor());
 
-// routers.put('/cars/:id', (req, res, next) => new CarController(req, res, next).updateCars());
+routers.put('/motorcycles/:id', (req, res, next) => 
+  new MotorcycleController(req, res, next).updateMotor());
 
 export default routers;
