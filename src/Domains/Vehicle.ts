@@ -1,6 +1,6 @@
-import IVehicles from '../Interfaces/IVehicles';
+import IVehicles from '../Interfaces/IVehicle';
 
-abstract class Vehicles {
+abstract class Vehicle {
   protected id?: string;
   protected model: string;
   protected year: number;
@@ -34,4 +34,4 @@ abstract class Vehicles {
   }
 }
 
-export default Vehicles;
+export default Vehicle;
