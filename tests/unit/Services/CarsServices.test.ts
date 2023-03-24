@@ -68,7 +68,7 @@ describe('Check the car service layer', function () {
     expect(result).to.be.deep.equal(carInputAll);
   });
 
-  it('Listing a car by id', async function () {
+  it('Listing a car by ids', async function () {
     const id = '634852326b35b59438fbea31';
     
     const carPutId: ICar = {
