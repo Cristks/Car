@@ -89,4 +89,24 @@ describe('Check the car service layer', function () {
 
     expect(result).to.be.deep.equal(carOutPutId);
   });
+
+  it(
+    'Verifies that it is not possible to successfully list a car of its non-existent id', 
+    async function () {
+      const invalidId = '634852326b35b59438fbeaXX';
+   
+      sinon.stub(Model, 'findById').resolves({});
+      
+      try {
+        const service = new CarService();
+        await service.findByIdCars(invalidId);
+      } catch (error) {
+        expect((error as Error).message).to.be.deep.equal('Invalid mongo id');
+      }
+    },
+  );
+
+  afterEach(function () {
+    sinon.restore();
+  });
 });
