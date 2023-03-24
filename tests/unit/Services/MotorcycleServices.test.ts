@@ -53,7 +53,7 @@ describe('Check the Motorcycle service layer', function () {
       },
       {
         id: '634852326b35b59438fbea31',
-        model: 'Honda Cbr 1000rr',
+        model: 'Honda',
         year: 2011,
         color: 'Orange',
         status: true,
@@ -78,7 +78,7 @@ describe('Check the Motorcycle service layer', function () {
     
     const motorPutId: IMotorcycle = {
       id: '634852326b35b59438fbea31',
-      model: 'Honda Cbr 1000rr',
+      model: 'Honda',
       year: 2011,
       color: 'Orange',
       status: true,
@@ -112,6 +112,55 @@ describe('Check the Motorcycle service layer', function () {
       }
     },
   );
+
+  it(
+    'Verifies that it is not possible to successfully list if a non-existent Motorcycle', 
+    async function () {
+      const id = '634852326b35b59438fbeaxx';
+    
+      sinon.stub(Model, 'findById').resolves(null);
+      try {
+        const service = new MotorcycleService();
+        await service.findByIdMotor(id);
+      } catch (error) {
+        expect((error as Error).message).to.be.deep.equal('Invalid mongo id');
+      }
+    },
+  );
+
+  it('check if it is possible to update', async function () {
+    const id = '641c6b98b79b7d4e6d612565';
+
+    const motorInput: IMotorcycle = {
+      id: '634852326b35b59438fbea31',
+      model: 'Honda Cbr 1000rr',
+      year: 2011,
+      color: 'Orange',
+      status: true,
+      buyValue: 59.900,
+      category: 'Street',
+      engineCapacity: 1000,
+      
+    };
+
+    const motorOutput: Motorcycle = new Motorcycle({
+      id: '634852326b35b59438fbea31',
+      model: 'Honda Cbr 1000rr',
+      year: 2011,
+      color: 'Orange',
+      status: true,
+      buyValue: 82.000, // altera valor de venda
+      category: 'Street',
+      engineCapacity: 1000,
+    });
+    
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(motorOutput);
+    
+    const service = new MotorcycleService();
+    const result = await service.updateMotor(id, motorInput);
+
+    expect(result).to.be.deep.equal(motorOutput);
+  });
 
   afterEach(function () {
     sinon.restore();

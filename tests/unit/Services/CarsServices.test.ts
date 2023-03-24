@@ -106,6 +106,53 @@ describe('Check the car service layer', function () {
     },
   );
 
+  it(
+    'Verifies that it is not possible to successfully list if a non-existent car', 
+    async function () {
+      const id = '634852326b35b59438fbeCar';
+    
+      sinon.stub(Model, 'findById').resolves(null);
+      try {
+        const service = new CarService();
+        await service.findByIdCars(id);
+      } catch (error) {
+        expect((error as Error).message).to.be.deep.equal('Invalid mongo id');
+      }
+    },
+    
+  );
+
+  it('check if it is possible to update', async function () {
+    const id = '641c6b98b79b7d4e6d612565';
+
+    const carInput: ICar = {
+      id: '634852326b35b59438fbea31',
+      model: 'Tempra',
+      year: 1995,
+      color: 'Black',
+      buyValue: 39,
+      doorsQty: 2,
+      seatsQty: 5,
+    };
+
+    const carOutput: Car = new Car({
+      id: '634852326b35b59438fbea31',
+      model: 'Tempra',
+      year: 1995,
+      color: 'Black',
+      buyValue: 59, // altera valo de venda
+      doorsQty: 2,
+      seatsQty: 5,
+    });
+    
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(carOutput);
+    
+    const service = new CarService();
+    const result = await service.updateCars(id, carInput);
+
+    expect(result).to.be.deep.equal(carOutput);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
